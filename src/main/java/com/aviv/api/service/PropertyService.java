@@ -10,6 +10,7 @@ public interface PropertyService {
             BigDecimal minArea,
             BigDecimal maxArea,
             Integer roomCount,
-            String city
+            String city,
+            String zipcode
     );
 }

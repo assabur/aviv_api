@@ -16,6 +16,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
           AND (:minArea  IS NULL OR p.area  >= :minArea)
           AND (:maxArea  IS NULL OR p.area  <= :maxArea)
           AND (:roomCount IS NULL OR p.roomCount = :roomCount)
+          AND (:zipcode IS NULL OR p.zipcode LIKE :zipcode)
           AND (:cityPattern IS NULL OR LOWER(p.city) LIKE :cityPattern)
         """)
     List<Property> search(
@@ -24,6 +25,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
             @Param("minArea")  BigDecimal minArea,
             @Param("maxArea")  BigDecimal maxArea,
             @Param("roomCount") Integer roomCount,
-            @Param("cityPattern") String cityPattern
+            @Param("cityPattern") String cityPattern,
+            @Param("zipcode") String zipcode
     );
 }

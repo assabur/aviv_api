@@ -27,7 +27,8 @@ public class PropertyController {
             @RequestParam(required = false) BigDecimal minArea,
             @RequestParam(required = false) BigDecimal maxArea,
             @RequestParam(required = false) Integer roomCount,
-            @RequestParam(required = false) String city
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String zipcode
     ) {
         // petite validation
         if (minPrice != null && maxPrice != null && minPrice.compareTo(maxPrice) > 0) {
@@ -41,7 +42,7 @@ public class PropertyController {
             );
         }
 
-        List<PropertyDto> data = service.search(minPrice, maxPrice, minArea, maxArea, roomCount, city)
+        List<PropertyDto> data = service.search(minPrice, maxPrice, minArea, maxArea, roomCount, city,zipcode)
                 .stream()
                 .map(mapper::toDto)
                 .toList();

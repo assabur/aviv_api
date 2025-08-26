@@ -25,13 +25,14 @@ public class PropertyServiceImpl implements PropertyService {
             BigDecimal minArea,
             BigDecimal maxArea,
             Integer roomCount,
-            String city
+            String city,
+            String zipcode
     ) {
         // On transforme city en motif LIKE insensible à la casse : %city%
         String cityPattern = (city == null || city.isBlank())
                 ? null
                 : "%" + city.trim().toLowerCase() + "%";
 
-        return repo.search(minPrice, maxPrice, minArea, maxArea, roomCount, cityPattern);
+        return repo.search(minPrice, maxPrice, minArea, maxArea, roomCount, cityPattern,zipcode);
     }
 }

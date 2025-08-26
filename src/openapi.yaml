@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Aviv Property API
+  version: "1.0.0"
+  description: |
+    Simple REST API to expose the `property` table.
+servers:
+  - url: http://localhost:8080
+paths:
+
+  /properties/{id}:
+    get:
+      summary: Get property by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer, format: int64 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PropertyResponse" }
+        "404": { description: Not found }
+
+  /properties/search:
+    get:
+      summary: Search properties
+      parameters:
+        - in: query
+          name: minPrice
+          schema: { type: number, format: double }
+        - in: query
+          name: maxPrice
+          schema: { type: number, format: double }
+        - in: query
+          name: minArea
+          schema: { type: number, format: double }
+        - in: query
+          name: maxArea
+          schema: { type: number, format: double }
+        - in: query
+          name: roomCount
+          schema: { type: integer }
+        - in: query
+          name: city
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/PropertyResponse" }
+components:
+  schemas:
+    PropertyRequest:
+      type: object
+      properties:
+        startDate: { type: string }
+        price: { type: number, format: double }
+        area: { type: number, format: double }
+        siteArea: { type: number, format: double }
+        floor: { type: integer }
+        roomCount: { type: integer }
+        balconyCount: { type: integer }
+        terraceCount: { type: integer }
+        hasGarden: { type: string }
+        city: { type: string }
+        zipcode: { type: string }
+        hasPassengerLift: { type: string }
+        isNewConstruction: { type: string }
+        buildYear: { type: integer }
+        terraceArea: { type: number, format: double }
+        hasCellar: { type: string }
+        idTransactionType: { type: integer }
+        idItemType: { type: integer }
+        idItemSubType: { type: integer }
+      required: [city]
+    PropertyResponse:
+      allOf:
+        - type: object
+          properties:
+            id: { type: integer, format: int64 }
+        - $ref: "#/components/schemas/PropertyRequest"
