@@ -1,11 +1,11 @@
 
 #  Architecture du projet Spring Boot — *Property API*
 
-Ce document décrit l’architecture **logique** et **technique** d’un service Spring Boot qui expose la table `property` (PostgreSQL), avec couches **Controller → Service → Repository**, **DTOs**, **mappers MapStruct**, **JPA/Hibernate**, **validation**, **docs OpenAPI**, **tests** et **observabilité**.
+Ce document décrit l’architecture **logique** et **technique** d’un service Spring Boot qui expose la table `property` (PostgreSQL), avec couches **Controller → Service → Repository**, **DTOs**, **mappers MapStruct**, **JPA/Hibernate**, **validation**, **docs OpenAPI**.
 
 ---
 
-## 🔭 Vue d’ensemble (couches)
+## Vue d’ensemble (couches)
 
 ```
 ┌──────────────┐   HTTP/JSON    ┌──────────────────────────┐
@@ -138,25 +138,5 @@ COPY target/*.jar app.jar
 ENV JAVA_OPTS="-Xms256m -Xmx512m"
 EXPOSE 8080
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
-```
-
-**Compose (PostgreSQL + API)**
-```yaml
-services:
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: your_db
-      POSTGRES_USER: your_user
-      POSTGRES_PASSWORD: your_password
-    ports: ["5432:5432"]
-  api:
-    build: .
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/your_db
-      SPRING_DATASOURCE_USERNAME: your_user
-      SPRING_DATASOURCE_PASSWORD: your_password
-    ports: ["8080:8080"]
-    depends_on: [db]
 ```
 
