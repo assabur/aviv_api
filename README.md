@@ -36,7 +36,7 @@ Ce document décrit l’architecture **logique** et **technique** d’un service
 
 - **Entities** minimalistes (anémique) : mapping des colonnes, relations `@ManyToOne` si nécessaire.
 - **Repositories** : interfaces `JpaRepository<Entity, Id>` + méthodes de requêtes custom
-- **Transactions** : méthodes **service** annotées `@Transactional`
+
 
 **Exemple :** `PropertyRepository`
 ```java
