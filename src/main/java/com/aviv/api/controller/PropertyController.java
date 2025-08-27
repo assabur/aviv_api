@@ -47,12 +47,7 @@ public class PropertyController {
                 .map(mapper::toDto)
                 .toList();
 
-        // data = liste vide
-        if (data.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    ApiResponse.of(404, "Aucune propriété trouvée", data)
-            );
-        }
+
 
         return ResponseEntity.ok(
                 ApiResponse.of(200, "Propriétés trouvées : " + data.size(), data)
